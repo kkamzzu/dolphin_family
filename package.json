@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "three": "^0.146.0"
+  },
+  "name": "dolphin_family",
+  "version": "1.0.0",
+  "main": "d.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

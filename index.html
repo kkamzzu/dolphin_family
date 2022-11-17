@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
+        "GLTFLoader" : "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js"
+      }
+    }
+
+    </script>
+
+    <script type="module">
+        // import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
+        import {GLTFLoader} from 'GLTFLoader';
+        import * as THREE from 'three';
+        
+        // 3D model 브라우저에 보여주는 법
+        // 1. 장면 만들기
+        // 2. 브라우저에 렌더링 해주세요
+        
+        let scene =  new THREE.Scene();
+        let renderer = new THREE.WebGLRenderer(
+            {canvas : document.querySelector('#canvas'),
+            antialias : true
+          });
+        renderer.outputEncoding = THREE.sRGBEncoding;
+
+        // 카메라 소환
+        // perspective: 원근법 ㅇ
+        // orthographic: 원근법 개무시
+        let camera = new THREE.PerspectiveCamera(30, 1);
+        camera.position.set(0,0,20); //좌표설정
+
+        // // 조명,배경색
+        scene.background = new THREE.Color('blue');
+        let light = new THREE.DirectionalLight(0xffff00, 10);
+        scene.add(light);
+          
+
+        // GLTF 파일 가져오는 법 
+        let loader = new GLTFLoader();
+        loader.load('the_dolphin_family/scene.gltf', function(gltf){
+            scene.add(gltf.scene);
+            
+            function animate(){
+                requestAnimationFrame(animate)
+                gltf.scene.rotation.x -= 0.01;
+                gltf.scene.rotation.y -= 0.01;
+                
+                renderer.render(scene, camera);
+            }
+            animate()
+        });
+
+        
+
+        // 3D model보여줄 떄 필요한 것들
+        // 1. 카메라 2. 조명 3. 배경
+
+        
+
+       
+    </script>
+</body>
+</html>
